@@ -1,0 +1,26 @@
+.navbar {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-12);
+  min-height: var(--nav-h);
+  padding: var(--sp-6) var(--page-pad);
+  background: var(--brown);
+  color: var(--text-invert);
+  flex-wrap: wrap;
+}
+
+.navbar__links {
+  display: flex;
+  gap: var(--sp-6);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: var(--fs-body);
+}
+
+.navbar__actions {
+  display: flex;
+  gap: var(--sp-4);
+  font-size: var(--fs-sm);
+  margin-left: auto;
+}

@@ -1,0 +1,22 @@
+.footer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-12);
+  padding: var(--sp-12) var(--page-pad);
+  background: var(--brown);
+  color: var(--text-invert);
+}
+
+.footer__col {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+  font-size: var(--fs-sm);
+  min-width: 160px;
+}
+
+.footer__col h2 {
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  margin-bottom: var(--sp-2);
+}

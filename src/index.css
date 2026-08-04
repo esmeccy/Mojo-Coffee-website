@@ -1,111 +1,220 @@
+/* ============================================================
+   Mojo Coffee — global stylesheet
+   1. tokens   2. reset/base   3. shared bits   4. layout blocks
+   ============================================================ */
+
+/* ---------- 1. tokens ---------- */
 :root {
-  --text: #6b6375;
-  --text-h: #08060d;
-  --bg: #fff;
-  --border: #e5e4e7;
-  --code-bg: #f4f3ec;
-  --accent: #aa3bff;
-  --accent-bg: rgba(170, 59, 255, 0.1);
-  --accent-border: rgba(170, 59, 255, 0.5);
-  --social-bg: rgba(244, 243, 236, 0.5);
-  --shadow:
-    rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
+  /* brand */
+  --brown: #452e21;
+  --cream: #f8f3e9;
+  --sage: #5b7347;
+  --sage-hover: #849c6d;
+  --ink: #12100e;
+  --white: #fff;
 
-  --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --heading: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --mono: ui-monospace, Consolas, monospace;
+  /* roles */
+  --bg: var(--cream);
+  --text: var(--ink);
+  --text-invert: var(--white);
+  --border: var(--ink);
 
-  font: 18px/145% var(--sans);
-  letter-spacing: 0.18px;
-  color-scheme: light dark;
-  color: var(--text);
-  background: var(--bg);
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  /* type */
+  --sans: "Poppins", system-ui, "Segoe UI", Roboto, sans-serif;
+  --fs-h1: clamp(1.75rem, 1.2rem + 2vw, 2.5rem);
+  --fs-h2: clamp(1.25rem, 1rem + 1vw, 1.5rem);
+  --fs-body: 1rem;
+  --fs-sm: 0.875rem;
+  --fw-bold: 600;
 
-  @media (max-width: 1024px) {
-    font-size: 16px;
-  }
+  /* space — 4pt scale */
+  --sp-1: 0.25rem;
+  --sp-2: 0.5rem;
+  --sp-3: 0.75rem;
+  --sp-4: 1rem;
+  --sp-6: 1.5rem;
+  --sp-8: 2rem;
+  --sp-12: 3rem;
+  --sp-16: 4rem;
+
+  /* shape */
+  --radius: 30px;
+  --radius-pill: 999px;
+  --border-w: 1.5px;
+
+  --page-pad: clamp(1.25rem, 4vw, 3rem);
+  --nav-h: 72px;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --text: #9ca3af;
-    --text-h: #f3f4f6;
-    --bg: #16171d;
-    --border: #2e303a;
-    --code-bg: #1f2028;
-    --accent: #c084fc;
-    --accent-bg: rgba(192, 132, 252, 0.15);
-    --accent-border: rgba(192, 132, 252, 0.5);
-    --social-bg: rgba(47, 48, 58, 0.5);
-    --shadow:
-      rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
-  }
-
-  #social .button-icon {
-    filter: invert(1) brightness(2);
-  }
+/* ---------- 2. reset / base ---------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
 
 body {
   margin: 0;
+  font: var(--fs-body) / 1.5 var(--sans);
+  color: var(--text);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 #root {
-  width: 1126px;
-  max-width: 100%;
-  margin: 0 auto;
-  text-align: center;
-  border-inline: 1px solid var(--border);
   min-height: 100svh;
   display: flex;
   flex-direction: column;
-  box-sizing: border-box;
 }
 
 h1,
+h2,
+h3 {
+  margin: 0;
+  line-height: 1.2;
+  font-weight: var(--fw-bold);
+}
+h1 {
+  font-size: var(--fs-h1);
+}
 h2 {
-  font-family: var(--heading);
-  font-weight: 500;
-  color: var(--text-h);
+  font-size: var(--fs-h2);
 }
 
-h1 {
-  font-size: 56px;
-  letter-spacing: -1.68px;
-  margin: 32px 0;
-  @media (max-width: 1024px) {
-    font-size: 36px;
-    margin: 20px 0;
-  }
-}
-h2 {
-  font-size: 24px;
-  line-height: 118%;
-  letter-spacing: -0.24px;
-  margin: 0 0 8px;
-  @media (max-width: 1024px) {
-    font-size: 20px;
-  }
-}
 p {
   margin: 0;
 }
 
-code,
-.counter {
-  font-family: var(--mono);
-  display: inline-flex;
-  border-radius: 4px;
-  color: var(--text-h);
+a {
+  color: inherit;
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
 }
 
-code {
-  font-size: 15px;
-  line-height: 135%;
-  padding: 4px 8px;
-  background: var(--code-bg);
+:focus-visible {
+  outline: 2px solid var(--sage);
+  outline-offset: 2px;
+}
+
+/* ---------- 3. shared bits ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--sp-2) var(--sp-6);
+  border: none;
+  border-radius: var(--radius);
+  font: inherit;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+.btn:hover {
+  text-decoration: none;
+}
+
+.btn--sage {
+  background: var(--sage);
+  color: var(--text-invert);
+  min-width: 116px;
+}
+.btn--sage:hover {
+  background: var(--sage-hover);
+}
+
+.btn--dark {
+  background: var(--ink);
+  color: var(--text-invert);
+  border-radius: var(--radius-pill);
+  padding: var(--sp-3) var(--sp-16);
+  font-size: 1.25rem;
+}
+.btn--dark:hover {
+  background: var(--brown);
+}
+
+/* wordmark — logo lives in public/, so the src is root-absolute: /mojo-coffee.png */
+.wordmark {
+  display: block;
+  height: 56px;
+  width: auto;
+}
+
+.wordmark--lg {
+  height: 88px;
+}
+
+/* form controls */
+input,
+textarea {
+  font: inherit;
+  color: var(--text);
+  background: var(--white);
+  border: var(--border-w) solid var(--border);
+  border-radius: var(--radius);
+  padding: var(--sp-2) var(--sp-3);
+  width: 100%;
+}
+textarea {
+  resize: vertical;
+  min-height: 240px;
+}
+
+/* ---------- 4. layout blocks ----------
+   Navbar and Footer live in their own files next to their components. */
+
+/* page shell */
+.page {
+  flex: 1;
+  padding: var(--sp-12) var(--page-pad) var(--sp-16);
+}
+
+.page--center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-6);
+  text-align: center;
+}
+
+/* contact form */
+.contact__form {
+  margin-top: var(--sp-12);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-8);
+}
+
+.contact__row {
+  display: flex;
+  gap: var(--sp-12);
+  flex-wrap: wrap;
+}
+
+.contact__actions {
+  display: flex;
+  justify-content: center;
+  margin-top: var(--sp-4);
+}
+
+.field {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-4);
+  flex: 1 1 320px;
+}
+.field label {
+  font-weight: var(--fw-bold);
+  white-space: nowrap;
+}
+.field--stack {
+  flex-direction: column;
+  align-items: stretch;
+  gap: var(--sp-3);
+}
+.field--stack label {
+  align-self: flex-start;
 }
