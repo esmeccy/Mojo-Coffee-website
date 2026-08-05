@@ -7,7 +7,7 @@
 
 .contact__row {
   display: flex;
-  gap: var(--sp-12);
+  gap: var(--sp-4);
   flex-wrap: wrap;
 }
 
@@ -24,11 +24,20 @@
   margin-top: var(--sp-4);
 }
 
-/* Always in the DOM so screen readers announce it on change (role="status"),
-   and so the button doesn't jump when it appears. */
-.contact__status {
-  min-height: 1.5em;
-  text-align: center;
-  color: var(--sage);
-  font-weight: var(--fw-bold);
+.contact__confirm-actions {
+  display: flex;
+  gap: var(--sp-4);
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* Match the two buttons — .btn--dark's own padding is sized for a lone CTA. */
+.contact__confirm-actions .btn {
+  padding: var(--sp-3) var(--sp-8);
+  font-size: 1rem;
+}
+
+/* The heading takes focus on submit; it's a scroll target, not a control. */
+.page--center h1:focus-visible {
+  outline: none;
 }

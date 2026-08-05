@@ -31,6 +31,13 @@ function errorFor(el) {
 function Contact() {
   const [errors, setErrors] = useState({});
   const [sent, setSent] = useState(false);
+  const confirmHeading = useRef(null);
+
+  // Swapping the form out drops focus to <body>, which leaves keyboard and
+  // screen-reader users with no idea anything happened. Move it to the heading.
+  useEffect(() => {
+    if (sent) confirmHeading.current?.focus();
+  }, [sent]);
 
   // Validate on blur, not on every keystroke — don't flag an email as malformed
   // while it's still being typed.
@@ -64,14 +71,39 @@ function Contact() {
 
     // ponytail: no backend yet — swap for a fetch() when there's an endpoint.
     console.log(Object.fromEntries(new FormData(form)));
-    form.reset();
+    // The form unmounts, so its fields clear themselves — but `errors` lives on
+    // the component and would still be here on "Send again".
     setErrors({});
     setSent(true);
   }
 
+  if (sent) {
+    return (
+      <main className="page page--center">
+        <h1 ref={confirmHeading} tabIndex={-1}>
+          Thank you! Your message is on its way!
+        </h1>
+        <p>We&apos;ll get back to you within 2 business days.</p>
+
+        <div className="contact__confirm-actions">
+          <Link to="/" className="btn btn--dark">
+            Back to home
+          </Link>
+          <button
+            type="button"
+            className="btn btn--sage"
+            onClick={() => setSent(false)}
+          >
+            Send again
+          </button>
+        </div>
+      </main>
+    );
+  }
+
   return (
     <main className="page">
-      <h1>Send us message!</h1>
+      <h1>Send us Message</h1>
 
       {/* noValidate: keep the constraint checks, drop the unstyleable browser bubbles */}
       <form className="contact__form" onSubmit={handleSubmit} noValidate>
@@ -154,10 +186,6 @@ function Contact() {
             Submit
           </button>
         </div>
-
-        <p className="contact__status" role="status">
-          {sent && "Thanks! We'll get back to you within 2 business days."}
-        </p>
       </form>
     </main>
   );
