@@ -152,7 +152,7 @@ a:hover {
   background: var(--brown);
 }
 
-/* wordmark — logo lives in public/, so the src is root-absolute: /mojo-coffee.png */
+/* wordmark — logo lives in public/, so the src is prefixed with import.meta.env.BASE_URL */
 .wordmark {
   display: block;
   height: 56px;

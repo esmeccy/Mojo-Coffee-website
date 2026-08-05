@@ -6,7 +6,11 @@ function Navbar() {
   return (
     <nav className="navbar">
       <Link to="/" aria-label="Mojo Coffee home">
-        <img className="wordmark" src="/mojo-coffee.png" alt="Mojo Coffee" />
+        <img
+          className="wordmark"
+          src={`${import.meta.env.BASE_URL}mojo-coffee.png`}
+          alt="Mojo Coffee"
+        />
       </Link>
 
       <ul className="navbar__links">

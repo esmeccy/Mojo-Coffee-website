@@ -5,7 +5,11 @@ import "./Footer.css";
 function Footer() {
   return (
     <footer className="footer">
-      <img className="wordmark wordmark--lg" src="/mojo-coffee.png" alt="Mojo Coffee" />
+      <img
+        className="wordmark wordmark--lg"
+        src={`${import.meta.env.BASE_URL}mojo-coffee.png`}
+        alt="Mojo Coffee"
+      />
 
       <div className="footer__col">
         <h2>Hours</h2>
