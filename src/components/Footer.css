@@ -1,5 +1,6 @@
 .footer {
   display: flex;
+  justify-content: space-between;
   flex-wrap: wrap;
   gap: var(--sp-12);
   padding: var(--sp-12) var(--page-pad);

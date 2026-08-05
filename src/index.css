@@ -12,6 +12,7 @@
   --sage-hover: #849c6d;
   --ink: #12100e;
   --white: #fff;
+  --error: #b3261e;
 
   /* roles */
   --bg: var(--cream);
@@ -22,7 +23,7 @@
   /* type */
   --sans: "Poppins", system-ui, "Segoe UI", Roboto, sans-serif;
   --fs-h1: clamp(1.75rem, 1.2rem + 2vw, 2.5rem);
-  --fs-h2: clamp(1.25rem, 1rem + 1vw, 1.5rem);
+  --fs-h2: clamp(1rem, .85rem + 1vw, 1.5rem);
   --fs-body: 1rem;
   --fs-sm: 0.875rem;
   --fw-bold: 600;
@@ -39,6 +40,7 @@
 
   /* shape */
   --radius: 30px;
+  --field-radius: 8px;
   --radius-pill: 999px;
   --border-w: 1.5px;
 
@@ -153,13 +155,63 @@ textarea {
   color: var(--text);
   background: var(--white);
   border: var(--border-w) solid var(--border);
-  border-radius: var(--radius);
+  border-radius: var(--field-radius);
   padding: var(--sp-2) var(--sp-3);
   width: 100%;
+  transition:
+    border-color 0.15s,
+    box-shadow 0.15s;
 }
 textarea {
   resize: vertical;
   min-height: 240px;
+}
+
+/* The UA default is too faint to read — keep it clearly under the real text. */
+::placeholder {
+  color: color-mix(in srgb, var(--text) 55%, transparent);
+  opacity: 1;
+}
+
+/* active */
+input:focus-visible,
+textarea:focus-visible {
+  outline: none;
+  border-color: var(--sage);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--sage) 30%, transparent);
+}
+
+/* error — driven by aria-invalid so the visual and the a11y state can't drift */
+input[aria-invalid="true"],
+textarea[aria-invalid="true"] {
+  border-color: var(--error);
+}
+input[aria-invalid="true"]:focus-visible,
+textarea[aria-invalid="true"]:focus-visible {
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--error) 25%, transparent);
+}
+
+/* field: label + control + error message */
+.field {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: var(--sp-3);
+}
+.field label {
+  font-weight: var(--fw-bold);
+  align-self: flex-start;
+}
+.field__control {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-1);
+  min-width: 0;
+}
+.field__error {
+  font-size: var(--fs-sm);
+  color: var(--error);
+  padding-inline: var(--sp-3);
 }
 
 /* ---------- 4. layout blocks ----------
@@ -180,41 +232,3 @@ textarea {
   text-align: center;
 }
 
-/* contact form */
-.contact__form {
-  margin-top: var(--sp-12);
-  display: flex;
-  flex-direction: column;
-  gap: var(--sp-8);
-}
-
-.contact__row {
-  display: flex;
-  gap: var(--sp-12);
-  flex-wrap: wrap;
-}
-
-.contact__actions {
-  display: flex;
-  justify-content: center;
-  margin-top: var(--sp-4);
-}
-
-.field {
-  display: flex;
-  align-items: center;
-  gap: var(--sp-4);
-  flex: 1 1 320px;
-}
-.field label {
-  font-weight: var(--fw-bold);
-  white-space: nowrap;
-}
-.field--stack {
-  flex-direction: column;
-  align-items: stretch;
-  gap: var(--sp-3);
-}
-.field--stack label {
-  align-self: flex-start;
-}

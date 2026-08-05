@@ -1,0 +1,34 @@
+.contact__form {
+  margin-top: var(--sp-12);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-8);
+}
+
+.contact__row {
+  display: flex;
+  gap: var(--sp-12);
+  flex-wrap: wrap;
+}
+
+/* Split the row evenly; below ~320px each they wrap to their own line.
+   Scoped to the row so the full-width Message field isn't given a 320px
+   flex-basis in the form's column direction (that would be a 320px height). */
+.contact__row .field {
+  flex: 1 1 320px;
+}
+
+.contact__actions {
+  display: flex;
+  justify-content: center;
+  margin-top: var(--sp-4);
+}
+
+/* Always in the DOM so screen readers announce it on change (role="status"),
+   and so the button doesn't jump when it appears. */
+.contact__status {
+  min-height: 1.5em;
+  text-align: center;
+  color: var(--sage);
+  font-weight: var(--fw-bold);
+}
