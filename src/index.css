@@ -3,6 +3,18 @@
    1. tokens   2. reset/base   3. shared bits   4. layout blocks
    ============================================================ */
 
+/* ---------- 0. fonts ----------
+   "The Rolling Stone" — self-hosted (not on Google Fonts). Free for
+   personal use only per dafont.com; a commercial license from the
+   author (Cat.B) is required before this site can ship publicly. */
+@font-face {
+  font-family: "The Rolling Stone";
+  src: url("./assets/fonts/TheRollingStone.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
 /* ---------- 1. tokens ---------- */
 :root {
   /* brand */
@@ -22,6 +34,8 @@
 
   /* type */
   --sans: "Poppins", system-ui, "Segoe UI", Roboto, sans-serif;
+  --display: "Abril Fatface", Georgia, serif;
+  --display-section: "The Rolling Stone", "Abril Fatface", Georgia, serif;
   --fs-h1: clamp(1.75rem, 1.2rem + 2vw, 2.5rem);
   --fs-h2: clamp(1rem, .85rem + 1vw, 1.5rem);
   --fs-body: 1rem;
@@ -75,7 +89,8 @@ h2,
 h3 {
   margin: 0;
   line-height: 1.2;
-  font-weight: var(--fw-bold);
+  font-family: var(--display-section);
+  font-weight: 400;
 }
 h1 {
   font-size: var(--fs-h1);
