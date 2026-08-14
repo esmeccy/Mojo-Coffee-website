@@ -315,7 +315,7 @@
 .newsletter__img {
   width: 100%;
   height: auto;
-  object-fit: contain;
+  object-fit: fill;
   border-radius: 50%;
   aspect-ratio: 1;
 }
