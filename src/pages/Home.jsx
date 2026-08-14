@@ -59,7 +59,7 @@ export default function Home() {
             Discover Flavors Inspired By Coffee Cultures Around The World.
           </h1>
           <p className="hero__sub">
-            Discover flavors inspired by coffee cultures around the world.
+            Introduces Mojo Coffee’s global inspiration and positions its offerings as a way to explore diverse coffee cultures and flavors.
           </p>
           <a href="/products" className="btn btn--sage hero__cta">
             Explore Our Blends
