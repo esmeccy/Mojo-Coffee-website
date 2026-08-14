@@ -330,6 +330,11 @@
 
   .why {
     grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .why__left {
+    justify-content: center;
   }
 
   .why__right {
@@ -341,6 +346,10 @@
     grid-row: 3;
     grid-template-columns: 1fr;
     gap: var(--sp-6);
+  }
+
+  .feature {
+    align-items: center;
   }
 
   .newsletter {
