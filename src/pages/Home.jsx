@@ -50,6 +50,26 @@ const features = [
 ];
 
 export default function Home() {
+  const [newsletterEmail, setNewsletterEmail] = useState("");
+  const [newsletterError, setNewsletterError] = useState("");
+  const [subscribed, setSubscribed] = useState(false);
+
+  function handleNewsletterSubmit(e) {
+    e.preventDefault();
+    const input = e.currentTarget.elements.email;
+
+    if (!input.checkValidity()) {
+      setNewsletterError(input.validationMessage);
+      return;
+    }
+
+    // ponytail: no backend yet — swap for a fetch() when there's an endpoint.
+    console.log({ email: input.value });
+    setNewsletterError("");
+    setNewsletterEmail("");
+    setSubscribed(true);
+  }
+
   return (
     <main className="home">
       {/* ── Hero ── */}
@@ -126,16 +146,49 @@ export default function Home() {
             sharing our journey and connecting with those who share our passion
             for coffee, culture, and sustainability.
           </p>
-          <div className="newsletter__form">
-            <input
-              type="email"
-              placeholder="Enter your email"
-              className="newsletter__input"
-              aria-label="Email address"
-            />
-            <button className="btn btn--dark newsletter__btn">
-              Keep Me Alerted
-            </button>
+          <div className="newsletter__form-wrap">
+            {subscribed ? (
+              <p className="newsletter__success">
+                Thanks — you&apos;re on the list! Check your inbox to confirm.
+              </p>
+            ) : (
+              <>
+                <form
+                  className="newsletter__form"
+                  onSubmit={handleNewsletterSubmit}
+                  noValidate
+                >
+                  <input
+                    type="email"
+                    name="email"
+                    placeholder="Enter your email"
+                    className="newsletter__input"
+                    aria-label="Email address"
+                    aria-invalid={Boolean(newsletterError)}
+                    aria-describedby={
+                      newsletterError ? "newsletter-email-error" : undefined
+                    }
+                    value={newsletterEmail}
+                    onChange={(e) => {
+                      setNewsletterEmail(e.target.value);
+                      if (newsletterError) setNewsletterError("");
+                    }}
+                    required
+                  />
+                  <button
+                    type="submit"
+                    className="btn btn--dark newsletter__btn"
+                  >
+                    Keep Me Alerted
+                  </button>
+                </form>
+                {newsletterError && (
+                  <p className="field__error" id="newsletter-email-error">
+                    {newsletterError}
+                  </p>
+                )}
+              </>
+            )}
           </div>
         </div>
         <div className="newsletter__img-wrap" aria-hidden="true">
