@@ -124,7 +124,6 @@
   border-radius: 0 0 var(--radius) var(--radius);
   padding: var(--sp-3) var(--sp-4);
   border: none;
-  transition: background-color 0.2s;
 }
 
 .drink-card__btn:hover {
@@ -297,7 +296,6 @@
   font-weight: var(--fw-bold);
   white-space: nowrap;
   cursor: pointer;
-  transition: background-color 0.2s;
 }
 
 .newsletter__btn:hover {
